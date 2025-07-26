@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react"
 import { db } from "../data/db"
 import toast from "react-hot-toast"
+import type { CartItem, Guitar } from "../types"
 
 export const useCart = () => {
-    const initialCart = () => {
+
+    const initialCart = () : CartItem[] => {
         const localStorageCart = localStorage.getItem("cart")
         return localStorageCart ? JSON.parse(localStorageCart) : []
     }
@@ -18,8 +20,8 @@ export const useCart = () => {
         localStorage.setItem("cart", JSON.stringify(cart))
     }, [cart])
 
-    const addToCart = (item) => {
-        const itemExists = cart.findIndex((guitar) => guitar.id == item.id)
+    const addToCart = (item : Guitar) => {
+        const itemExists = cart.findIndex( guitar => guitar.id === item.id)
         if (itemExists >= 0) {
             if (cart[itemExists].quantity >= MAX_ITEMS) {
                 toast.error(`El límite de guitarras por modelo es ${MAX_ITEMS}`)
@@ -30,17 +32,17 @@ export const useCart = () => {
             setCart(updatedCart)
             toast.success("Cantidad actualizada")
         } else {
-            item.quantity = 1
-            setCart([...cart, item])
+            const newItem : CartItem = {...item, quantity: 1}
+            setCart([...cart, newItem])
             toast.success(`Producto agregado al carrito`)
         }
     }
 
-    const removeFromCart = (id) => {
+    const removeFromCart = (id : Guitar['id']) => {
         setCart(prevCart => prevCart.filter(guitar => guitar.id != id))
     }
 
-    const incrementQuantity = (id) => {
+    const incrementQuantity = (id : Guitar['id']) => {
         const updatedCart = cart.map(item => {
             if (item.id === id && item.quantity < MAX_ITEMS) {
                 return {
@@ -55,7 +57,7 @@ export const useCart = () => {
         setCart(updatedCart)
     }
 
-    const decrementQuantity = (id) => {
+    const decrementQuantity = (id : Guitar['id']) => {
         const updatedCart = cart.map(item => {
             if (id === item.id && item.quantity > MIN_ITEMS) {
                 return {

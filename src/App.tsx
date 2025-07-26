@@ -1,5 +1,5 @@
 
-import { Guitar } from "./components/Guitar"
+import { GuitarItem } from "./components/GuitarItem"
 import { Header } from "./components/Header"
 import { Toaster } from "react-hot-toast"
 import { useCart } from "./hooks/useCart"
@@ -25,7 +25,7 @@ export const App = () => {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          {data.map((guitar) => <Guitar
+          {data.map((guitar) => <GuitarItem
             guitar={guitar}
             key={guitar.id}
             addToCart={addToCart}
