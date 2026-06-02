@@ -71,18 +71,18 @@ A modern e-commerce web application specialized in guitars, built with React, Ty
 
 ```
 src/
-├── components/          # Reusable components
-│   ├── GuitarItem.tsx  # Individual guitar component
-│   └── Header.tsx      # Header component with cart
-├── data/               # Static data
-│   └── db.ts          # Guitar database
-├── hooks/             # Custom hooks
-│   └── useCart.ts     # Hook for cart management
-├── types/             # TypeScript definitions
-│   └── index.ts       # Types and interfaces
-├── App.tsx           # Main component
-├── main.tsx          # Entry point
-└── index.css         # Global styles
+├── components/              # Reusable components
+│   ├── GuitarItem.tsx      # Individual guitar component
+│   └── Header.tsx          # Header component with cart
+├── data/                   # Static data
+│   └── db.ts              # Guitar database
+├── reducers/               # State management
+│   └── cart-reducer.ts    # Cart reducer with useReducer
+├── types/                  # TypeScript definitions
+│   └── index.ts           # Types and interfaces
+├── App.tsx                # Main component
+├── main.tsx               # Entry point
+└── index.css              # Global styles
 ```
 
 ## 🔧 Customization
@@ -103,7 +103,7 @@ Edit the `src/data/db.ts` file to add new guitars:
 
 ### Modify cart limits
 
-In `src/hooks/useCart.ts`, you can change the constants:
+In `src/reducers/cart-reducer.ts`, you can change the constants:
 
 ```typescript
 const MAX_ITEMS = 5  // Máximo por guitarra
